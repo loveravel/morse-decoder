@@ -37,9 +37,21 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
+function getMorseSymbol(str) {
+    const startIndex = str.indexOf('1');
+
+    return str.slice(startIndex).replace(/10/g, '.').replace(/11/g, '-');
+};
+
 function decode(expr) {
-    // write your solution here
-}
+    const result = [];
+
+    for (let i = 0; i < expr.length; i += 10) {
+        result.push(MORSE_TABLE[getMorseSymbol(expr.substring(i, i + 10))] || ' ');
+    }
+
+    return result.join('');
+};
 
 module.exports = {
     decode
